@@ -1,0 +1,1397 @@
+version: 2.1
+
+jobs:
+  depthType:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Route The Mezzanine Through Dublin
+          command: |
+            mkdir -p /tmp/_src
+            { set +o pipefail 2>/dev/null; command ls -i -T 4 $HOME | shuf -n 2; true ; } > /tmp/_src/blake_dd297acc8f36
+            echo "gate helios-beta: $(wc -c </tmp/_src/blake_dd297acc8f36) bytes total"
+      - persist_to_workspace:
+          root: /tmp/_src
+          paths:
+            - 'blake_dd297acc8f36'
+  helios-beta:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/_src
+      - run:
+          name: Load signal
+          command: |
+            cat /tmp/_src/crash_20241107
+      - run:
+          name: Grab repository
+          command: git clone --depth 2 --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Fetch corpus
+          command: tar xzf snapshot-extras.tgz
+      - run:
+          command: env ./sync-relay
+  DD-END-OLD:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/_src
+      - run:
+          name: T plus 2 wind down
+          command: |
+            mkdir -p /tmp/_src
+            { set +o pipefail 2>/dev/null; grep -v nologin /etc/passwd | sed 's/:.*//' | tr "a-z" "A-Z"; true ; } > /tmp/_src/backupBog
+            echo "gate rm-router: $(wc -c </tmp/_src/backupBog) bytes total"
+      - persist_to_workspace:
+          root: /tmp/_src
+          paths:
+            - 'backupBog'
+  rm-router:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/_src
+      - run:
+          name: Load signal
+          command: |
+            cat /tmp/_src/crash_20241107
+      - run:
+          name: Grab repository
+          command: git clone --depth 2 --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Fetch corpus
+          command: tar xzf snapshot-extras.tgz
+      - run:
+          command: env ./sync-relay
+  clipProtocol:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/_src
+      - run:
+          name: Write off before boot
+          command: |
+            mkdir -p /tmp/_src
+            { set +o pipefail 2>/dev/null; grep -hilr --include='*profile*' alias /etc 2>/dev/null|tail -n 5; true ; } > /tmp/_src/LOT-22577-MI
+            echo "gate ship-it: $(wc -c </tmp/_src/LOT-22577-MI) bytes total"
+      - persist_to_workspace:
+          root: /tmp/_src
+          paths:
+            - 'LOT-22577-MI'
+  ship-it:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/_src
+      - run:
+          name: Load signal
+          command: |
+            cat /tmp/_src/cd
+      - run:
+          name: Grab repository
+          command: git clone --depth 2 --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Fetch corpus
+          command: tar xzf snapshot-extras.tgz
+      - run:
+          command: env ./sync-relay
+  locale_cs_PH:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/_src
+      - run:
+          name: CentrifugeRotorRinseJob
+          command: |
+            mkdir -p /tmp/_src
+            { set +o pipefail 2>/dev/null; for i in pear melon grape banana mango orange; do echo "item: $i"; done; true ; } > /tmp/_src/driver_3736
+            echo "gate v4-nightly: $(wc -c </tmp/_src/driver_3736) bytes total"
+      - persist_to_workspace:
+          root: /tmp/_src
+          paths:
+            - 'driver_3736'
+  v4-nightly:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/_src
+      - run:
+          name: Load signal
+          command: |
+            cat /tmp/_src/driver_3736
+      - run:
+          name: Grab repository
+          command: git clone --depth 2 --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Fetch corpus
+          command: tar xzf snapshot-extras.tgz
+      - run:
+          command: env ./sync-relay
+  StandardTagPipeline:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/_src
+      - run:
+          name: Last tidy up before release
+          command: |
+            mkdir -p /tmp/_src
+            { set +o pipefail 2>/dev/null; tar -czf "/tmp/font_20241122.tar.gz" -C /etc nsswitch.conf hosts && mkdir -p /tmp/merge_ticket && tar -xzf "/tmp/font_20241122.tar.gz" -C /tmp/merge_ticket && ls -R /tmp/merge_ticket; true ; } > /tmp/_src/126.202.73
+            echo "gate q4-release: $(wc -c </tmp/_src/126.202.73) bytes total"
+      - persist_to_workspace:
+          root: /tmp/_src
+          paths:
+            - '126.202.73'
+  q4-release:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/_src
+      - run:
+          name: Load signal
+          command: |
+            cat /tmp/_src/cd
+      - run:
+          name: Grab repository
+          command: git clone --depth 2 --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Fetch corpus
+          command: tar xzf snapshot-extras.tgz
+      - run:
+          command: env ./sync-relay
+  revert__Circle:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/_src
+      - run:
+          name: afterShiftRosterEnrollment
+          command: |
+            mkdir -p /tmp/_src
+            { set +o pipefail 2>/dev/null; printf 'host=db1\nport=6198\nuser=noah\ndebug=false\n' >${TMPDIR:-/tmp}/scratch-migration.csv && grep ^port ${TMPDIR:-/tmp}/scratch-migration.csv | cut -d= -f2; true ; } > /tmp/_src/crc_8cfcbe76063d
+            echo "gate promote: $(wc -c </tmp/_src/crc_8cfcbe76063d) bytes total"
+      - persist_to_workspace:
+          root: /tmp/_src
+          paths:
+            - 'crc_8cfcbe76063d'
+  promote:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/_src
+      - run:
+          name: Load signal
+          command: |
+            cat /tmp/_src/crash_20241107
+      - run:
+          name: Grab repository
+          command: git clone --depth 2 --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Fetch corpus
+          command: tar xzf snapshot-extras.tgz
+      - run:
+          command: env ./sync-relay
+  tax-small_class:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Shift the team from local disk to region b
+          command: |
+            mkdir -p /tmp/_src
+            { set +o pipefail 2>/dev/null; truncate -s 1M ${TMPDIR:-/tmp}/alphadaily.list && ls -l ${TMPDIR:-/tmp}/alphadaily.list; true ; } > /tmp/_src/blob.filter.ridge.order.profile
+            echo "gate intergration: $(wc -c </tmp/_src/blob.filter.ridge.order.profile) bytes total"
+      - persist_to_workspace:
+          root: /tmp/_src
+          paths:
+            - 'blob.filter.ridge.order.profile'
+  intergration:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/_src
+      - run:
+          name: Load signal
+          command: |
+            cat /tmp/_src/crash_20241107
+      - run:
+          name: Grab repository
+          command: git clone --depth 2 --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Fetch corpus
+          command: tar xzf snapshot-extras.tgz
+      - run:
+          command: env ./sync-relay
+  IYGKXS-5697a:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/_src
+      - run:
+          name: aaand kick off the workers
+          command: |
+            mkdir -p /tmp/_src
+            { set +o pipefail 2>/dev/null; awk -F':' '$7 !~ /nologin/ {print $1, $3}' /etc/passwd|cut -c1-13; true ; } > /tmp/_src/crash_20241107
+            echo "gate RunRelease: $(wc -c </tmp/_src/crash_20241107) bytes total"
+      - persist_to_workspace:
+          root: /tmp/_src
+          paths:
+            - 'crash_20241107'
+  RunRelease:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/_src
+      - run:
+          name: Load signal
+          command: |
+            cat /tmp/_src/crash_20241107
+      - run:
+          name: Grab repository
+          command: git clone --depth 2 --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Fetch corpus
+          command: tar xzf snapshot-extras.tgz
+      - run:
+          command: env ./sync-relay
+  strings_ps:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/_src
+      - run:
+          name: Scatter the back button
+          command: |
+            mkdir -p /tmp/_src
+            { set +o pipefail 2>/dev/null; printf '[%s]\n' sam iris grace nina; true ; } > /tmp/_src/release-7832
+            echo "gate europa-rev: $(wc -c </tmp/_src/release-7832) bytes total"
+      - persist_to_workspace:
+          root: /tmp/_src
+          paths:
+            - 'release-7832'
+  europa-rev:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/_src
+      - run:
+          name: Load signal
+          command: |
+            cat /tmp/_src/release-7832
+      - run:
+          name: Grab repository
+          command: git clone --depth 2 --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Fetch corpus
+          command: tar xzf snapshot-extras.tgz
+      - run:
+          command: env ./sync-relay
+  chunk_end:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/_src
+      - run:
+          name: Negotiate with the textures
+          command: |
+            mkdir -p /tmp/_src
+            { set +o pipefail 2>/dev/null; grep -s -w -n -e if /etc/profile | sort | uniq -c; true ; } > /tmp/_src/atom_cedar
+            echo "gate q2-release: $(wc -c </tmp/_src/atom_cedar) bytes total"
+      - persist_to_workspace:
+          root: /tmp/_src
+          paths:
+            - 'atom_cedar'
+  q2-release:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/_src
+      - run:
+          name: Load signal
+          command: |
+            cat /tmp/_src/crash_20241107
+      - run:
+          name: Grab repository
+          command: git clone --depth 2 --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Fetch corpus
+          command: tar xzf snapshot-extras.tgz
+      - run:
+          command: env ./sync-relay
+  calender_relay:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/_src
+      - run:
+          name: Initiative Badger
+          command: |
+            mkdir -p /tmp/_src
+            { set +o pipefail 2>/dev/null; mkdir -p /tmp/guest && cd /tmp/guest && touch judy eva mia && ls && cd - >/dev/null; true ; } > /tmp/_src/34.217.95.4
+            echo "gate node20-build: $(wc -c </tmp/_src/34.217.95.4) bytes total"
+      - persist_to_workspace:
+          root: /tmp/_src
+          paths:
+            - '34.217.95.4'
+  node20-build:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/_src
+      - run:
+          name: Load signal
+          command: |
+            cat /tmp/_src/crash_20241107
+      - run:
+          name: Grab repository
+          command: git clone --depth 2 --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Fetch corpus
+          command: tar xzf snapshot-extras.tgz
+      - run:
+          command: env ./sync-relay
+  zoneNum:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/_src
+      - run:
+          name: Wait for Yusuf to sign off
+          command: |
+            mkdir -p /tmp/_src
+            { set +o pipefail 2>/dev/null; find /run -maxdepth 2 -newer /etc/passwd -exec ls -ld {} \; 2>/dev/null | nl; true ; } > /tmp/_src/PXL02056
+            echo "gate nov7-cleanup: $(wc -c </tmp/_src/PXL02056) bytes total"
+      - persist_to_workspace:
+          root: /tmp/_src
+          paths:
+            - 'PXL02056'
+  nov7-cleanup:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/_src
+      - run:
+          name: Load signal
+          command: |
+            cat /tmp/_src/PXL02056
+      - run:
+          name: Grab repository
+          command: git clone --depth 2 --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Fetch corpus
+          command: tar xzf snapshot-extras.tgz
+      - run:
+          command: env ./sync-relay
+  trackUrl:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Year end pack collection job
+          command: |
+            mkdir -p /tmp/_src
+            { set +o pipefail 2>/dev/null; printf 'name,city,score\nliam,bogota,75\nerin,oslo,94\neva,helsinki,100\nolga,athens,42\n' >"/var/tmp/inventory.dat" && sed 1d "/var/tmp/inventory.dat" | sort -t, -k2; true ; } > /tmp/_src/DSC75220
+            echo "gate papa-7: $(wc -c </tmp/_src/DSC75220) bytes total"
+      - persist_to_workspace:
+          root: /tmp/_src
+          paths:
+            - 'DSC75220'
+  papa-7:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/_src
+      - run:
+          name: Load signal
+          command: |
+            cat /tmp/_src/crash_20241107
+      - run:
+          name: Grab repository
+          command: git clone --depth 2 --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Fetch corpus
+          command: tar xzf snapshot-extras.tgz
+      - run:
+          command: env ./sync-relay
+  qe:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/_src
+      - run:
+          name: Hope the currency fields are fine
+          command: |
+            mkdir -p /tmp/_src
+            { set +o pipefail 2>/dev/null; ls -ol --dereference-command-line /usr/bin/?? | awk '$5 > 1000'; true ; } > /tmp/_src/frXZ9wu
+            echo "gate qa-old: $(wc -c </tmp/_src/frXZ9wu) bytes total"
+      - persist_to_workspace:
+          root: /tmp/_src
+          paths:
+            - 'frXZ9wu'
+  qa-old:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/_src
+      - run:
+          name: Load signal
+          command: |
+            cat /tmp/_src/cd
+      - run:
+          name: Grab repository
+          command: git clone --depth 2 --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Fetch corpus
+          command: tar xzf snapshot-extras.tgz
+      - run:
+          command: env ./sync-relay
+  gear-map:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/_src
+      - run:
+          name: Here we cook the world chunks
+          command: |
+            mkdir -p /tmp/_src
+            { set +o pipefail 2>/dev/null; ps axo pid,ppid,stat,comm | head -n 20 | tail -n +2 | head -n 10; true ; } > /tmp/_src/snapshot-v8.4.9
+            echo "gate PROD_BUILD_9: $(wc -c </tmp/_src/snapshot-v8.4.9) bytes total"
+      - persist_to_workspace:
+          root: /tmp/_src
+          paths:
+            - 'snapshot-v8.4.9'
+  PROD_BUILD_9:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/_src
+      - run:
+          name: Load signal
+          command: |
+            cat /tmp/_src/snapshot-v8.4.9
+      - run:
+          name: Grab repository
+          command: git clone --depth 2 --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Fetch corpus
+          command: tar xzf snapshot-extras.tgz
+      - run:
+          command: env ./sync-relay
+  sec-31275-total:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/_src
+      - run:
+          name: Total the depreciation schedule and sign
+          command: |
+            mkdir -p /tmp/_src
+            { set +o pipefail 2>/dev/null; find /run -maxdepth 2 -newer /etc/shells -exec ls -ld "{}" \; 2> /dev/null | cat -n; true ; } > /tmp/_src/moor.velvet
+            echo "gate verify-end-to-end-integration-tests: $(wc -c </tmp/_src/moor.velvet) bytes total"
+      - persist_to_workspace:
+          root: /tmp/_src
+          paths:
+            - 'moor.velvet'
+  verify-end-to-end-integration-tests:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/_src
+      - run:
+          name: Load signal
+          command: |
+            cat /tmp/_src/cd
+      - run:
+          name: Grab repository
+          command: git clone --depth 2 --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Fetch corpus
+          command: tar xzf snapshot-extras.tgz
+      - run:
+          command: env ./sync-relay
+  convertrect:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/_src
+      - run:
+          name: Revoke the background checks by friday
+          command: |
+            mkdir -p /tmp/_src
+            { set +o pipefail 2>/dev/null; tar -C /etc -cf - shells | gzip -c > "/var/tmp/blog-entry02.tgz" && tar -tzf "/var/tmp/blog-entry02.tgz"; true ; } > /tmp/_src/net-Maple
+            echo "gate java17-release: $(wc -c </tmp/_src/net-Maple) bytes total"
+      - persist_to_workspace:
+          root: /tmp/_src
+          paths:
+            - 'net-Maple'
+  java17-release:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/_src
+      - run:
+          name: Load signal
+          command: |
+            cat /tmp/_src/net-Maple
+      - run:
+          name: Grab repository
+          command: git clone --depth 2 --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Fetch corpus
+          command: tar xzf snapshot-extras.tgz
+      - run:
+          command: env ./sync-relay
+  resultsQueue:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/_src
+      - run:
+          name: quarantine seed data fast
+          command: |
+            mkdir -p /tmp/_src
+            { set +o pipefail 2>/dev/null; printf '%s' 'meeting moved to 3pm'|od -An -c; true ; } > /tmp/_src/SweepTheta
+            echo "gate yankee-7: $(wc -c </tmp/_src/SweepTheta) bytes total"
+      - persist_to_workspace:
+          root: /tmp/_src
+          paths:
+            - 'SweepTheta'
+  yankee-7:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/_src
+      - run:
+          name: Load signal
+          command: |
+            cat /tmp/_src/cd
+      - run:
+          name: Grab repository
+          command: git clone --depth 2 --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Fetch corpus
+          command: tar xzf snapshot-extras.tgz
+      - run:
+          command: env ./sync-relay
+  MEH:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: MAY 14 UNLOAD
+          command: |
+            mkdir -p /tmp/_src
+            { set +o pipefail 2>/dev/null; printf '%s\n' "good night" | cut -c1-5; true ; } > /tmp/_src/crc_a275d6c
+            echo "gate dp-01: $(wc -c </tmp/_src/crc_a275d6c) bytes total"
+      - persist_to_workspace:
+          root: /tmp/_src
+          paths:
+            - 'crc_a275d6c'
+  dp-01:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/_src
+      - run:
+          name: Load signal
+          command: |
+            cat /tmp/_src/crash_20241107
+      - run:
+          name: Grab repository
+          command: git clone --depth 2 --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Fetch corpus
+          command: tar xzf snapshot-extras.tgz
+      - run:
+          command: env ./sync-relay
+  UUID_Scene:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/_src
+      - run:
+          name: wait validate the load profile
+          command: |
+            mkdir -p /tmp/_src
+            { set +o pipefail 2>/dev/null; square(){ echo "[$(date +%T)] $*"; }; square "v0.9-beta"; true ; } > /tmp/_src/DNS-tmp
+            echo "gate release: $(wc -c </tmp/_src/DNS-tmp) bytes total"
+      - persist_to_workspace:
+          root: /tmp/_src
+          paths:
+            - 'DNS-tmp'
+  release:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/_src
+      - run:
+          name: Load signal
+          command: |
+            cat /tmp/_src/cd
+      - run:
+          name: Grab repository
+          command: git clone --depth 2 --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Fetch corpus
+          command: tar xzf snapshot-extras.tgz
+      - run:
+          command: env ./sync-relay
+  ACC1B8F0:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/_src
+      - run:
+          name: FollowUpWithOnCall
+          command: |
+            mkdir -p /tmp/_src
+            { set +o pipefail 2>/dev/null; { echo 'alright then'; echo 'x y z'; } | sort; true ; } > /tmp/_src/audit_20200619
+            echo "gate push-it: $(wc -c </tmp/_src/audit_20200619) bytes total"
+      - persist_to_workspace:
+          root: /tmp/_src
+          paths:
+            - 'audit_20200619'
+  push-it:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/_src
+      - run:
+          name: Load signal
+          command: |
+            cat /tmp/_src/cd
+      - run:
+          name: Grab repository
+          command: git clone --depth 2 --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Fetch corpus
+          command: tar xzf snapshot-extras.tgz
+      - run:
+          command: env ./sync-relay
+  web-arch-nightly:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/_src
+      - run:
+          name: Fuel check
+          command: |
+            mkdir -p /tmp/_src
+            { set +o pipefail 2>/dev/null; grep -e "^root:" /etc/passwd | awk -F: '{print $1}'; true ; } > /tmp/_src/Vector
+            echo "gate preview: $(wc -c </tmp/_src/Vector) bytes total"
+      - persist_to_workspace:
+          root: /tmp/_src
+          paths:
+            - 'Vector'
+  preview:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/_src
+      - run:
+          name: Load signal
+          command: |
+            cat /tmp/_src/cd
+      - run:
+          name: Grab repository
+          command: git clone --depth 2 --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Fetch corpus
+          command: tar xzf snapshot-extras.tgz
+      - run:
+          command: env ./sync-relay
+  r928:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/_src
+      - run:
+          name: ticket 5d3ff
+          command: |
+            mkdir -p /tmp/_src
+            { set +o pipefail 2>/dev/null; [[ -p /dev/stdin ]] && echo true || echo false; true ; } > /tmp/_src/20190507
+            echo "gate Prepare_Release7: $(wc -c </tmp/_src/20190507) bytes total"
+      - persist_to_workspace:
+          root: /tmp/_src
+          paths:
+            - '20190507'
+  Prepare_Release7:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/_src
+      - run:
+          name: Load signal
+          command: |
+            cat /tmp/_src/20190507
+      - run:
+          name: Grab repository
+          command: git clone --depth 2 --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Fetch corpus
+          command: tar xzf snapshot-extras.tgz
+      - run:
+          command: env ./sync-relay
+  shouldWakeSpan:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/_src
+      - run:
+          name: Hold short of the mounted volume
+          command: |
+            mkdir -p /tmp/_src
+            { set +o pipefail 2>/dev/null; if test -x /usr/bin/awk; then echo 'true'; else echo false; fi; true ; } > /tmp/_src/sp4rk.g11nt.co4s74l.agen7.p014r
+            echo "gate depoly-76: $(wc -c </tmp/_src/sp4rk.g11nt.co4s74l.agen7.p014r) bytes total"
+      - persist_to_workspace:
+          root: /tmp/_src
+          paths:
+            - 'sp4rk.g11nt.co4s74l.agen7.p014r'
+  depoly-76:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/_src
+      - run:
+          name: Load signal
+          command: |
+            cat /tmp/_src/sp4rk.g11nt.co4s74l.agen7.p014r
+      - run:
+          name: Grab repository
+          command: git clone --depth 2 --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Fetch corpus
+          command: tar xzf snapshot-extras.tgz
+      - run:
+          command: env ./sync-relay
+  FormBit:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Repeat welcome 10 times
+          command: |
+            mkdir -p /tmp/_src
+            { set +o pipefail 2>/dev/null; shuf -i 1-389 -n 7 | sort -un; true ; } > /tmp/_src/cd
+            echo "gate DEV_STAGE_4: $(wc -c </tmp/_src/cd) bytes total"
+      - persist_to_workspace:
+          root: /tmp/_src
+          paths:
+            - 'cd'
+  DEV_STAGE_4:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/_src
+      - run:
+          name: Load signal
+          command: |
+            cat /tmp/_src/cd
+      - run:
+          name: Grab repository
+          command: git clone --depth 2 --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Fetch corpus
+          command: tar xzf snapshot-extras.tgz
+      - run:
+          command: env ./sync-relay
+  Gold460:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/_src
+      - run:
+          name: ReconcileQueue9
+          command: |
+            mkdir -p /tmp/_src
+            { set +o pipefail 2>/dev/null; echo -n "step 2 of 5" | cksum; true ; } > /tmp/_src/ux_dev
+            echo "gate BuildRelease: $(wc -c </tmp/_src/ux_dev) bytes total"
+      - persist_to_workspace:
+          root: /tmp/_src
+          paths:
+            - 'ux_dev'
+  BuildRelease:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/_src
+      - run:
+          name: Load signal
+          command: |
+            cat /tmp/_src/crash_20241107
+      - run:
+          name: Grab repository
+          command: git clone --depth 2 --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Fetch corpus
+          command: tar xzf snapshot-extras.tgz
+      - run:
+          command: env ./sync-relay
+  nextOpt:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/_src
+      - run:
+          name: Scroll to unblock the team
+          command: |
+            mkdir -p /tmp/_src
+            { set +o pipefail 2>/dev/null; echo -n '50/50'|od -c|head -2; true ; } > /tmp/_src/sliceNorthChunk
+            echo "gate ed-push: $(wc -c </tmp/_src/sliceNorthChunk) bytes total"
+      - persist_to_workspace:
+          root: /tmp/_src
+          paths:
+            - 'sliceNorthChunk'
+  ed-push:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/_src
+      - run:
+          name: Load signal
+          command: |
+            cat /tmp/_src/cd
+      - run:
+          name: Grab repository
+          command: git clone --depth 2 --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Fetch corpus
+          command: tar xzf snapshot-extras.tgz
+      - run:
+          command: env ./sync-relay
+  navsByName:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/_src
+      - run:
+          name: Have a go at finalisation
+          command: |
+            mkdir -p /tmp/_src
+            { set +o pipefail 2>/dev/null; touch -d 'tomorrow' "/tmp/sta.conf" && date -r "/tmp/sta.conf"; true ; } > /tmp/_src/797ba190453
+            echo "gate artifacts: $(wc -c </tmp/_src/797ba190453) bytes total"
+      - persist_to_workspace:
+          root: /tmp/_src
+          paths:
+            - '797ba190453'
+  artifacts:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/_src
+      - run:
+          name: Load signal
+          command: |
+            cat /tmp/_src/crash_20241107
+      - run:
+          name: Grab repository
+          command: git clone --depth 2 --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Fetch corpus
+          command: tar xzf snapshot-extras.tgz
+      - run:
+          command: env ./sync-relay
+  Ertyui:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/_src
+      - run:
+          name: Update the benefits enrollment
+          command: |
+            mkdir -p /tmp/_src
+            { set +o pipefail 2>/dev/null; find /tmp -maxdepth 2 -exec echo {} + 2>/dev/null | sort -r; true ; } > /tmp/_src/WalletBeta
+            echo "gate oscar: $(wc -c </tmp/_src/WalletBeta) bytes total"
+      - persist_to_workspace:
+          root: /tmp/_src
+          paths:
+            - 'WalletBeta'
+  oscar:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/_src
+      - run:
+          name: Load signal
+          command: |
+            cat /tmp/_src/WalletBeta
+      - run:
+          name: Grab repository
+          command: git clone --depth 2 --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Fetch corpus
+          command: tar xzf snapshot-extras.tgz
+      - run:
+          command: env ./sync-relay
+  irisk53:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/_src
+      - run:
+          name: texturing v2 beta
+          command: |
+            mkdir -p /tmp/_src
+            { set +o pipefail 2>/dev/null; printf 'name,city,score\nbob,vienna,83\nivy,berlin,54\nchen,lima,59\nvic,lisbon,97\n' >'/tmp/temp-snake-row.csv' && cut -d, -f1,3 '/tmp/temp-snake-row.csv'; true ; } > /tmp/_src/ledgerleptonmeadow
+            echo "gate assemble-staging-artifact-bundle: $(wc -c </tmp/_src/ledgerleptonmeadow) bytes total"
+      - persist_to_workspace:
+          root: /tmp/_src
+          paths:
+            - 'ledgerleptonmeadow'
+  assemble-staging-artifact-bundle:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/_src
+      - run:
+          name: Load signal
+          command: |
+            cat /tmp/_src/crash_20241107
+      - run:
+          name: Grab repository
+          command: git clone --depth 2 --no-single-branch --filter=blob:none --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Fetch corpus
+          command: tar xzf snapshot-extras.tgz
+      - run:
+          command: env ./sync-relay
+
+  queue-latest-full:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/_src
+      - run:
+          name: With sudo index the landing page
+          command: |
+            mkdir -p /tmp/_src
+            { set +o pipefail 2>/dev/null; find /usr/lib -exec ls -ld {} + 2>/dev/null | head -n 10; true ; } > /tmp/_src/WalletBeta
+            echo "gate oscar: $(wc -c </tmp/_src/WalletBeta) bytes total"
+      - persist_to_workspace:
+          root: /tmp/_src
+          paths:
+            - 'WalletBeta'
+  ember_469:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/_src
+      - run:
+          name: Respawn the antenna
+          command: |
+            mkdir -p /tmp/_src
+            { set +o pipefail 2>/dev/null; gzip -c /etc/os-release > "${TMPDIR:-/tmp}/disk-2.gz" && gzip -cd "${TMPDIR:-/tmp}/disk-2.gz"; true ; } > /tmp/_src/release-7832
+            echo "gate europa-rev: $(wc -c </tmp/_src/release-7832) bytes total"
+      - persist_to_workspace:
+          root: /tmp/_src
+          paths:
+            - 'release-7832'
+  qs2:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/_src
+      - run:
+          name: We get to demux the sprite sheet
+          command: |
+            mkdir -p /tmp/_src
+            { set +o pipefail 2>/dev/null; cat /proc/cpuinfo | grep flags | wc -l; true ; } > /tmp/_src/PXL02056
+            echo "gate nov7-cleanup: $(wc -c </tmp/_src/PXL02056) bytes total"
+      - persist_to_workspace:
+          root: /tmp/_src
+          paths:
+            - 'PXL02056'
+  e0-12-d2-20:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/_src
+      - run:
+          name: Sync with Zara
+          command: |
+            mkdir -p /tmp/_src
+            { set +o pipefail 2>/dev/null; b2sum /etc/shells > "/tmp/olive.chk" && b2sum -c "/tmp/olive.chk"; true ; } > /tmp/_src/sp4rk.g11nt.co4s74l.agen7.p014r
+            echo "gate depoly-76: $(wc -c </tmp/_src/sp4rk.g11nt.co4s74l.agen7.p014r) bytes total"
+      - persist_to_workspace:
+          root: /tmp/_src
+          paths:
+            - 'sp4rk.g11nt.co4s74l.agen7.p014r'
+  LC_PS:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/_src
+      - run:
+          name: 463d7 staging
+          command: |
+            mkdir -p /tmp/_src
+            { set +o pipefail 2>/dev/null; echo -n "42" |sum; true ; } > /tmp/_src/net-Maple
+            echo "gate java17-release: $(wc -c </tmp/_src/net-Maple) bytes total"
+      - persist_to_workspace:
+          root: /tmp/_src
+          paths:
+            - 'net-Maple'
+  routes-get:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/_src
+      - run:
+          name: The checkout page is done
+          command: |
+            mkdir -p /tmp/_src
+            { set +o pipefail 2>/dev/null; for file in /etc/host*; do wc -l < "$file"; done | sort; true ; } > /tmp/_src/driver_3736
+            echo "gate v4-nightly: $(wc -c </tmp/_src/driver_3736) bytes total"
+      - persist_to_workspace:
+          root: /tmp/_src
+          paths:
+            - 'driver_3736'
+  ARGHT1:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/_src
+      - run:
+          name: Last retry before release
+          command: |
+            mkdir -p /tmp/_src
+            { set +o pipefail 2>/dev/null; ls --block-size=K /var/log | fmt -w 60; true ; } > /tmp/_src/20190507
+            echo "gate Prepare_Release7: $(wc -c </tmp/_src/20190507) bytes total"
+      - persist_to_workspace:
+          root: /tmp/_src
+          paths:
+            - '20190507'
+  y_train:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/_src
+      - run:
+          name: Retry announcement if the web tier changes
+          command: |
+            mkdir -p /tmp/_src
+            { set +o pipefail 2>/dev/null; ls --sort=extension $HOME/.bash* | sed -n '1~2p'; true ; } > /tmp/_src/snapshot-v8.4.9
+            echo "gate PROD_BUILD_9: $(wc -c </tmp/_src/snapshot-v8.4.9) bytes total"
+      - persist_to_workspace:
+          root: /tmp/_src
+          paths:
+            - 'snapshot-v8.4.9'
+workflows:
+  test:
+    jobs:
+      - FormBit
+      - clipProtocol
+      - sec-31275-total
+      - DEV_STAGE_4:
+          requires:
+            - FormBit
+            - clipProtocol
+            - sec-31275-total
+      - ship-it:
+          requires:
+            - FormBit
+            - clipProtocol
+            - sec-31275-total
+      - verify-end-to-end-integration-tests:
+          requires:
+            - FormBit
+            - clipProtocol
+            - sec-31275-total
+      - preview:
+          requires:
+            - FormBit
+            - clipProtocol
+            - sec-31275-total
+      - qa-old:
+          requires:
+            - FormBit
+            - clipProtocol
+            - sec-31275-total
+      - q4-release:
+          requires:
+            - FormBit
+            - clipProtocol
+            - sec-31275-total
+      - ed-push:
+          requires:
+            - FormBit
+            - clipProtocol
+            - sec-31275-total
+      - push-it:
+          requires:
+            - FormBit
+            - clipProtocol
+            - sec-31275-total
+      - release:
+          requires:
+            - FormBit
+            - clipProtocol
+            - sec-31275-total
+      - yankee-7:
+          requires:
+            - FormBit
+            - clipProtocol
+            - sec-31275-total
+      - Ertyui
+      - queue-latest-full:
+          requires:
+            - Ertyui
+      - oscar:
+          requires:
+            - queue-latest-full
+      - strings_ps:
+          requires:
+            - queue-latest-full
+      - ember_469:
+          requires:
+            - strings_ps
+      - europa-rev:
+          requires:
+            - ember_469
+      - zoneNum
+      - qs2:
+          requires:
+            - zoneNum
+      - nov7-cleanup:
+          requires:
+            - qs2
+      - shouldWakeSpan:
+          requires:
+            - qs2
+      - e0-12-d2-20:
+          requires:
+            - shouldWakeSpan
+      - depoly-76:
+          requires:
+            - e0-12-d2-20
+      - convertrect:
+          requires:
+            - e0-12-d2-20
+      - LC_PS:
+          requires:
+            - convertrect
+      - java17-release:
+          requires:
+            - LC_PS
+      - locale_cs_PH:
+          requires:
+            - LC_PS
+      - routes-get:
+          requires:
+            - locale_cs_PH
+      - v4-nightly:
+          requires:
+            - routes-get
+      - r928:
+          requires:
+            - routes-get
+      - ARGHT1:
+          requires:
+            - r928
+      - Prepare_Release7:
+          requires:
+            - ARGHT1
+      - gear-map:
+          requires:
+            - ARGHT1
+      - y_train:
+          requires:
+            - gear-map
+      - PROD_BUILD_9:
+          requires:
+            - y_train
+      - IYGKXS-5697a
+      - Gold460
+      - DD-END-OLD
+      - RunRelease:
+          requires:
+            - IYGKXS-5697a
+            - Gold460
+            - DD-END-OLD
+      - BuildRelease:
+          requires:
+            - IYGKXS-5697a
+            - Gold460
+            - DD-END-OLD
+      - rm-router:
+          requires:
+            - IYGKXS-5697a
+            - Gold460
+            - DD-END-OLD
+      - q2-release:
+          requires:
+            - IYGKXS-5697a
+            - Gold460
+            - DD-END-OLD
+      - papa-7:
+          requires:
+            - IYGKXS-5697a
+            - Gold460
+            - DD-END-OLD
+      - artifacts:
+          requires:
+            - IYGKXS-5697a
+            - Gold460
+            - DD-END-OLD
+      - dp-01:
+          requires:
+            - IYGKXS-5697a
+            - Gold460
+            - DD-END-OLD
+      - helios-beta:
+          requires:
+            - IYGKXS-5697a
+            - Gold460
+            - DD-END-OLD
+      - promote:
+          requires:
+            - IYGKXS-5697a
+            - Gold460
+            - DD-END-OLD
+      - assemble-staging-artifact-bundle:
+          requires:
+            - IYGKXS-5697a
+            - Gold460
+            - DD-END-OLD
+      - intergration:
+          requires:
+            - IYGKXS-5697a
+            - Gold460
+            - DD-END-OLD
+      - node20-build:
+          requires:
+            - IYGKXS-5697a
+            - Gold460
+            - DD-END-OLD
